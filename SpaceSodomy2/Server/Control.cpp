@@ -73,6 +73,9 @@ void Control::receive() {
 		time_by_id[id_] = aux::get_milli_count();
 		sf::Color new_color = aux::from_hsv(aux::random_int(0, 360), 1, 1);
 		game.new_player(id_, new_color, name_, gun_name, hull_name, left_module, right_module);
+
+		//sf::Color _new_color = aux::from_hsv(aux::random_int(0, 360), 1, 1);
+		//game.new_player(aux::random_int(-1000, -10), _new_color, "BOT", gun_name, hull_name, left_module, right_module);
 	}
 	// Applying commands
 	if (token_by_id[id_] == token) {

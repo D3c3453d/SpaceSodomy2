@@ -43,6 +43,9 @@
     <Filter Include="Header Files\Brains">
       <UniqueIdentifier>{71f89775-b076-4d1f-a197-419e867e061f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AI">
+      <UniqueIdentifier>{cd6dfde9-4c86-436c-9190-5c7e40843c24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="ProjectileDef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -240,6 +246,9 @@
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileDef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
