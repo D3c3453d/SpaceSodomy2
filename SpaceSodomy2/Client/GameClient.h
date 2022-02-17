@@ -87,9 +87,6 @@ public:
 	// Decodes class from string
 	void update_state(std::string source);
 
-	// Get ship
-	Ship* get_ship(int id);
-
 	// Get players
 	std::map<int, Player*>* get_players();
 

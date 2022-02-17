@@ -835,13 +835,6 @@ void GameClient::update_state(std::string source) {
 	}
 }
 
-Ship* GameClient::get_ship(int id) {
-	for (auto ship : ships)
-		if (ship->get_player()->get_id() == id)
-			return ship;
-	return nullptr;
-}
-
 std::map<int, Player*>* GameClient::get_players() {
 	return &players;
 }

@@ -21,6 +21,7 @@
 #include "GameObjects.h"
 #include "RocketBrain.h"
 #include "Forcefield.h"
+#include "AI.h"
 
 
 class Game {
@@ -145,6 +146,7 @@ protected:
 	// Calculates where beam intersects walls
 	b2Vec2 get_beam_intersection(b2Vec2 start, float angle);
 
+	AI bot_ai;
 public:
 	Game();
 	// Sets command to player with id=id
@@ -169,6 +171,8 @@ public:
 		std::string left_module, std::string right_module);
 	// Gets player by id
 	Player* player_by_id(int id);
+	// Get ship
+	Ship* get_ship(int id);
 	// Deletes player
 	void delete_player(int id);
 	~Game();

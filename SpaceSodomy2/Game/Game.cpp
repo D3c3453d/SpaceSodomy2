@@ -492,6 +492,13 @@ void Game::process_players() {
 	// Creating ships
 	for (auto player_pair : players) {
 		auto player = player_pair.second;
+		if (!player->get_is_alive() && player->get_id() == -12) {
+			player->set_is_alive(1);
+
+			// creating ship
+			auto ship = create_ship(player, get_rand_respawn_pos(), aux::random_float(0, 2 * b2_pi, 3));
+			bot_ai.set_ship(ship);
+		}
 		if (!player->get_is_alive() && player->get_time_to_respawn()->get() < 0 
 			&& player->get_command_module()->get_command(CommandModule::RESPAWN) 
 			&& player->get_id() >= 0) { // The player is human
@@ -508,6 +515,10 @@ void Game::process_ships() {
 	// Deleting
 	std::set<Ship*> ships_to_delete;
 	for (auto ship : ships) {
+		if (ship->get_player()->get_id() > 0) {
+			bot_ai.step(ship);
+		}
+
 		if (auto_damage)
 			ship->get_hp()->modify(-dt*20);
 
@@ -1519,6 +1530,13 @@ Player* Game::player_by_id(int id) {
 	if (!players.count(id))
 		return nullptr;
 	return players[id];
+}
+
+Ship* Game::get_ship(int id) {
+	for (auto ship : ships)
+		if (ship->get_player()->get_id() == id)
+			return ship;
+	return nullptr;
 }
 
 void Game::delete_player(int id) {

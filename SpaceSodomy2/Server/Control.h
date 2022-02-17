@@ -10,6 +10,7 @@
 #include <set>
 #include <random>
 #include <ctime>
+#include <Game/AI.h>
 
 class Control {
 private:
