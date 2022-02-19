@@ -516,7 +516,7 @@ void Game::process_ships() {
 	std::set<Ship*> ships_to_delete;
 	for (auto ship : ships) {
 		if (ship->get_player()->get_id() > 0) {
-			bot_ai.step(ship);
+			bot_target = ship;
 		}
 
 		if (auto_damage)
@@ -879,6 +879,10 @@ void Game::step(float _dt) {
 	process_rockets();
 	process_rocket_manager();
 	process_forcefields();
+
+	if (bot_target != nullptr) {
+		bot_ai.step(bot_target);
+	}
 }
 
 float Game::get_dt() {

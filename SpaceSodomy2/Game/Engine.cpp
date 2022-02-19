@@ -23,8 +23,15 @@ void Engine::apply_force_linear(b2Vec2 direction) {
 	body->ApplyForceToCenter(force_linear * current_modifier * direction, 1);
 }
 
+float Engine::get_torque() {
+	if (body->GetFixtureList() != nullptr)
+		return force_angular * body->GetFixtureList()->GetShape()->m_radius;
+	else
+		return force_angular;
+}
+
 void Engine::apply_force_angular(float dir) {
-	body->ApplyTorque(dir * force_angular * body->GetFixtureList()->GetShape()->m_radius, 1);
+	body->ApplyTorque(dir * get_torque(), 1);
 }
 
 void Engine::stabilize_rotation() {

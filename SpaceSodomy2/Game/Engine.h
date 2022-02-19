@@ -39,6 +39,7 @@ public:
 	// Get methods
 	float get_force_linear();
 	float get_force_angular();
+	float get_torque();
 	// Set methods
 	void set_force_linear(float value);
 	void set_force_angular(float value);

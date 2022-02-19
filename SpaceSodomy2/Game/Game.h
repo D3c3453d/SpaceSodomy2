@@ -147,6 +147,7 @@ protected:
 	b2Vec2 get_beam_intersection(b2Vec2 start, float angle);
 
 	AI bot_ai;
+	Ship* bot_target = nullptr;
 public:
 	Game();
 	// Sets command to player with id=id
