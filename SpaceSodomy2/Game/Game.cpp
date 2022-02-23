@@ -415,6 +415,12 @@ void Game::delete_active_module(ActiveModule* active_module) {
 }
 
 void Game::delete_ship(Ship* ship) {
+	if (ship->get_player()->get_id() == -12) {
+		bot_ai.set_ship(nullptr);
+	}
+	if (bot_target != nullptr && ship->get_id() == bot_target->get_id()) {
+		bot_target = nullptr;
+	}
 	delete_body(ship->get_body());
 	delete_engine(ship->get_engine());
 	delete_active_module(ship->get_gun());
@@ -880,9 +886,10 @@ void Game::step(float _dt) {
 	process_rocket_manager();
 	process_forcefields();
 
-	if (bot_target != nullptr) {
-		bot_ai.step(bot_target);
-	}
+	std::function<b2Vec2(b2Vec2, float)> beam_intersection = [&](b2Vec2 start, float angle) { 
+		return get_beam_intersection(start, angle); 
+	};
+	bot_ai.step(bot_target, beam_intersection);
 }
 
 float Game::get_dt() {

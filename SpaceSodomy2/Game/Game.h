@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <functional>
 #include "entities.h"
 #include "ProjectileManager.h"
 #include "EventManager.h"
@@ -142,10 +143,6 @@ protected:
 	void process_rocket_manager();
 	void process_forcefields();
 
-	// Misc
-	// Calculates where beam intersects walls
-	b2Vec2 get_beam_intersection(b2Vec2 start, float angle);
-
 	AI bot_ai;
 	Ship* bot_target = nullptr;
 public:
@@ -174,6 +171,9 @@ public:
 	Player* player_by_id(int id);
 	// Get ship
 	Ship* get_ship(int id);
+	// Misc
+	// Calculates where beam intersects walls
+	b2Vec2 get_beam_intersection(b2Vec2 start, float angle);
 	// Deletes player
 	void delete_player(int id);
 	~Game();

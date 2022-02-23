@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include "Ship.h"
 #include <AuxLib/AuxLib.h>
 
@@ -9,8 +10,9 @@ private:
 public:
 	void set_ship(Ship* _ship);
 	void move_to_point(b2Vec2 point);
-	void turn_to_angle(float angle);
+	bool turn_to_angle(float angle);
+	void shoot(Ship* ship, std::function<b2Vec2(b2Vec2, float)> beam_intersect);
 
-	void step(Ship* _ship);
+	void step(Ship* _ship, std::function<b2Vec2(b2Vec2, float)> beam_intersect);
 };
 
