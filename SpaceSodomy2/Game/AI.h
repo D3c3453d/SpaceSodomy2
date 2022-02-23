@@ -12,6 +12,7 @@ public:
 	void move_to_point(b2Vec2 point);
 	bool turn_to_angle(float angle);
 	void shoot(Ship* ship, std::function<b2Vec2(b2Vec2, float)> beam_intersect);
+	void safety_flight(std::function<b2Vec2(b2Vec2, float)> beam_intersect);
 
 	void step(Ship* _ship, std::function<b2Vec2(b2Vec2, float)> beam_intersect);
 };

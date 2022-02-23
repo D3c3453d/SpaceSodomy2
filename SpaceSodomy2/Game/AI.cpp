@@ -152,6 +152,21 @@ void AI::shoot(Ship* _ship, std::function<b2Vec2(b2Vec2, float)> beam_intersect)
 	}
 }
 
+void AI::safety_flight(std::function<b2Vec2(b2Vec2, float)> beam_intersect) {
+	float max_dist = 0;
+	b2Vec2 flight_point;
+	auto cur_point = ship->get_body()->GetPosition();
+	int beams_num = 12;
+	for (int i = 0; i < beams_num; i++) {
+		auto intersect = beam_intersect(cur_point, (2.0 * b2_pi / float(beams_num)) * float(i));
+		if (max_dist < (intersect - cur_point).Length()) {
+			max_dist = (intersect - cur_point).Length();
+			flight_point = intersect;
+		}
+	}
+	move_to_point(flight_point);
+}
+
 void AI::step(Ship* _ship, std::function<b2Vec2(b2Vec2, float)> beam_intersect) {
 	if (ship != nullptr) {
 		ship->get_player()->get_command_module()->set_command(CommandModule::ENGINE_ANG_RIGHT, 0);
@@ -165,7 +180,8 @@ void AI::step(Ship* _ship, std::function<b2Vec2(b2Vec2, float)> beam_intersect) 
 	if (ship != nullptr && _ship != nullptr) {
 		//turn_to_angle(aux::vec_to_angle(_ship->get_body()->GetPosition() - ship->get_body()->GetPosition()));
 		shoot(_ship, beam_intersect);
-		move_to_point({ 5, 5 });
+		//move_to_point({ 5, 5 });
+		safety_flight(beam_intersect);
 	}
 }
 
